@@ -1,0 +1,75 @@
+/* =============================================================================
+   DESIGN TOKENS
+   Blend of Hyperfoundation (near-black + mint glow + serif display) and
+   Aevo (pure-black rigor, mono tickers, structured panels).
+   --accent is overwritten at runtime from js/config.js (brand.js).
+   ========================================================================== */
+
+:root {
+  /* Base surfaces */
+  --bg:          #05060c;
+  --bg-2:        #080a11;
+  --surface:     #0c0e16;
+  --surface-2:   #11131d;
+  --surface-3:   #171a25;
+
+  /* Hairlines */
+  --line:        rgba(255, 255, 255, 0.07);
+  --line-2:      rgba(255, 255, 255, 0.12);
+  --line-strong: rgba(255, 255, 255, 0.20);
+
+  /* Text */
+  --text:        rgba(255, 255, 255, 0.95);
+  --text-2:      rgba(255, 255, 255, 0.66);
+  --text-3:      rgba(255, 255, 255, 0.52);
+  --text-4:      rgba(255, 255, 255, 0.40);
+
+  /* Brand accent (mint-aqua) — overridden by config at runtime */
+  --accent:        #57ebd0;
+  --accent-ink:    #04120e;
+  --accent-soft:   rgba(87, 235, 208, 0.14);
+  --accent-line:   rgba(87, 235, 208, 0.30);
+  --accent-glow:   rgba(87, 235, 208, 0.45);
+  --accent-deep:   #0a3b32;   /* forest tone for gradient blooms */
+
+  /* Glass (frosted panels over the video background) */
+  --glass:       rgba(13, 16, 24, 0.30);
+  --glass-2:     rgba(17, 20, 30, 0.40);
+  --glass-strong:rgba(9, 11, 18, 0.44);
+  --glass-line:  rgba(255, 255, 255, 0.11);
+  --glass-blur:  blur(16px) saturate(150%);
+
+  /* Market semantics */
+  --up:          #2fe0a0;
+  --up-soft:     rgba(47, 224, 160, 0.12);
+  --down:        #ff5d6e;
+  --down-soft:   rgba(255, 93, 110, 0.12);
+
+  /* Typography */
+  --font-display: 'Fraunces', 'Times New Roman', serif;
+  --font-sans:    'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  /* Radii */
+  --r-xs:  6px;
+  --r-sm:  8px;
+  --r-md:  12px;
+  --r-lg:  18px;
+  --r-xl:  26px;
+  --r-pill: 999px;
+
+  /* Shadows */
+  --shadow-sm:  0 1px 2px rgba(0,0,0,0.4);
+  --shadow-md:  0 12px 40px rgba(0,0,0,0.45);
+  --shadow-lg:  0 30px 80px rgba(0,0,0,0.55);
+  --shadow-accent: 0 10px 40px rgba(87, 235, 208, 0.18);
+
+  /* Layout */
+  --maxw: 1200px;
+  --gutter: clamp(20px, 5vw, 48px);
+  --nav-h: 68px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}

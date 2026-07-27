@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Miraukin — Options on tokenized stocks, on-chain</title>
+  <meta name="description" content="Trade calls and puts on tokenized equities, or write them to earn premium. Fully collateralized, oracle-priced, and open 24/7 on Robinhood Chain." />
+  <meta property="og:title" content="Miraukin — Options on tokenized stocks" />
+  <meta property="og:description" content="The options market for tokenized equities. On-chain, 24/7, fully collateralized." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#05060c" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/landing.css" />
+</head>
+<body>
+
+  <!-- ===================== SITE BACKGROUND (video) ===================== -->
+  <div class="site-bg" aria-hidden="true">
+    <video autoplay muted loop playsinline preload="auto" poster="assets/hero-poster.jpg">
+      <source src="assets/hero-bg.mp4" type="video/mp4" />
+    </video>
+  </div>
+
+  <!-- ===================== NAV ===================== -->
+  <header class="nav-shell">
+    <nav class="nav wrap">
+      <a class="brand" href="/">
+        <span class="brand-mark" style="color:var(--accent)">
+          <img src="assets/miraukin-logo.webp" alt="" width="30" height="30" />
+        </span>
+        <span class="brand-name" data-brand="name">Strike</span>
+      </a>
+      <div class="nav-links">
+        <a href="#markets">Markets</a>
+        <a href="#how">How it works</a>
+        <a href="#features">Why on-chain</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="nav-cta">
+        <a class="ticker-pill mono" href="#markets" id="navTicker" aria-label="live price">
+          <span class="dot"></span> <span id="navTickerText">SPY —</span>
+        </a>
+        <a class="nav-x" data-link="x" href="#" target="_blank" rel="noopener" aria-label="Miraukin on X">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a class="btn btn-accent btn-sm" href="app.html">Launch App</a>
+        <button class="nav-menu-btn" id="navMenuBtn" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+    <div class="hero-glow" aria-hidden="true">
+      <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+      <span class="grid-fade"></span>
+    </div>
+
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow reveal" data-ca-copy>CA · <span data-brand="ca-short">To be announced</span></span>
+        <h1 class="hero-title reveal">
+          <span class="serif l1">Options on real stocks,</span>
+          <span class="serif l2">settled <em>on-chain</em>.</span>
+        </h1>
+        <p class="hero-sub reveal" data-brand="herosub">
+          Buy calls and puts on tokenized equities, or write them to earn premium.
+          Fully collateralized, priced by live oracles, and open 24/7.
+        </p>
+        <div class="hero-actions reveal">
+          <a class="btn btn-accent" href="app.html">Start trading</a>
+          <a class="btn btn-ghost" href="#how">See how it works</a>
+        </div>
+        <div class="hero-trust reveal">
+          <span><i>◆</i> Fully collateralized</span>
+          <span><i>◆</i> Oracle settlement</span>
+          <span><i>◆</i> Non-custodial</span>
+        </div>
+      </div>
+
+      <!-- Live mini-terminal preview -->
+      <div class="hero-panel reveal" aria-label="live options preview">
+        <div class="panel-top">
+          <div class="pt-left">
+            <span class="pt-sym" id="prevSym">NVDA</span>
+            <span class="pt-name mono" id="prevName">NVIDIA · Nov 21</span>
+          </div>
+          <div class="pt-right mono">
+            <span id="prevSpot">$171.30</span>
+            <span class="delta pos" id="prevDelta">+0.00%</span>
+          </div>
+        </div>
+        <div class="panel-chain">
+          <div class="chain-head mono">
+            <span>Calls</span><span>Strike</span><span>Puts</span>
+          </div>
+          <div id="prevChain" class="chain-body mono"><!-- injected --></div>
+        </div>
+        <div class="panel-foot mono">
+          <span class="feed-dot" id="prevFeedDot"></span>
+          <span id="prevFeed">connecting feed…</span>
+          <a class="panel-launch" href="app.html">Open terminal →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== STATS BAND ===================== -->
+  <section class="stats-band">
+    <div class="wrap stats-grid">
+      <div class="stat reveal"><div class="stat-num serif" data-brand="marketcount">12</div><div class="stat-label">Tokenized markets live</div></div>
+      <div class="stat reveal"><div class="stat-num serif">24 / 7</div><div class="stat-label">Always-open trading</div></div>
+      <div class="stat reveal"><div class="stat-num serif">100<span class="pct">%</span></div><div class="stat-label">On-chain collateral</div></div>
+      <div class="stat reveal"><div class="stat-num serif">&lt;1<span class="pct">¢</span></div><div class="stat-label">Settlement gas cost</div></div>
+    </div>
+  </section>
+
+  <!-- ===================== HOW IT WORKS ===================== -->
+  <section id="how" class="section-pad">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">How it works</span>
+        <h2 class="serif">Three ways to take a position.</h2>
+        <p class="sec-sub">Every contract is fully collateralized in your own wallet and settles against a live oracle price. No broker, no market hours, no counterparty risk desk.</p>
+      </div>
+      <div class="how-grid">
+        <article class="how-card reveal">
+          <div class="how-ico">↗</div>
+          <h3>Buy calls & puts</h3>
+          <p>Go long a move in either direction with defined risk. Pay a premium, and your maximum loss is exactly that premium.</p>
+          <ul class="how-list mono">
+            <li>Defined, capped downside</li>
+            <li>Leverage without liquidation</li>
+            <li>Cash-settled at expiry</li>
+          </ul>
+        </article>
+        <article class="how-card reveal accent-card">
+          <div class="how-ico">✎</div>
+          <h3>Write to earn premium</h3>
+          <p>Sell covered calls or cash-secured puts against collateral you already hold and collect the premium up front.</p>
+          <ul class="how-list mono">
+            <li>Yield on idle holdings</li>
+            <li>Collateral locked, never rehypothecated</li>
+            <li>Auto-settled on-chain</li>
+          </ul>
+        </article>
+        <article class="how-card reveal">
+          <div class="how-ico">⤢</div>
+          <h3>Build strategies</h3>
+          <p>Combine legs into spreads, straddles and collars to shape your exact payoff and cost basis in one order.</p>
+          <ul class="how-list mono">
+            <li>Multi-leg in a single tx</li>
+            <li>Live payoff diagram</li>
+            <li>Portfolio Greeks</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FEATURES (numbered, Aevo-style) ===================== -->
+  <section id="features" class="section-pad features">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Why on-chain</span>
+        <h2 class="serif">The options desk, without the desk.</h2>
+      </div>
+      <div class="feat-list">
+        <article class="feat reveal">
+          <span class="feat-no mono">01</span>
+          <div class="feat-body">
+            <h3>Fully collateralized</h3>
+            <p>Every short option is backed 1:1 by locked collateral in a smart contract. There is no margin call and no way for a writer to default on assignment.</p>
+          </div>
+        </article>
+        <article class="feat reveal">
+          <span class="feat-no mono">02</span>
+          <div class="feat-body">
+            <h3>Oracle settlement</h3>
+            <p>Contracts settle against decentralized price feeds at expiry, cash-settled to the penny. No manual exercise, no pin risk games.</p>
+          </div>
+        </article>
+        <article class="feat reveal">
+          <span class="feat-no mono">03</span>
+          <div class="feat-body">
+            <h3>Open 24 / 7</h3>
+            <p>Tokenized equities never close. Hedge a weekend gap or trade an earnings reaction the moment it happens, not at the next opening bell.</p>
+          </div>
+        </article>
+        <article class="feat reveal">
+          <span class="feat-no mono">04</span>
+          <div class="feat-body">
+            <h3>Non-custodial</h3>
+            <p>Positions and collateral live in your wallet on <span data-brand="chain">Robinhood Chain</span>. Connect, trade, and withdraw permissionlessly with sub-cent gas.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== MARKETS ===================== -->
+  <section id="markets" class="section-pad markets">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Markets</span>
+        <h2 class="serif">Trade the names you already watch.</h2>
+        <p class="sec-sub">Live oracle prices across index ETFs and single names. Click any market to open its option chain.</p>
+      </div>
+      <div class="market-grid mono" id="marketGrid"><!-- injected --></div>
+    </div>
+  </section>
+
+  <!-- ===================== CTA ===================== -->
+  <section class="cta-band">
+    <div class="cta-glow" aria-hidden="true"></div>
+    <div class="wrap cta-inner reveal">
+      <h2 class="serif">What's your position?</h2>
+      <p>Connect a wallet and place your first contract in under a minute. No account, no paperwork.</p>
+      <div class="hero-actions">
+        <a class="btn btn-accent" href="app.html">Launch the terminal</a>
+        <a class="btn btn-ghost" data-link="docs" href="#">Read the docs</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section id="faq" class="section-pad">
+    <div class="wrap faq-wrap">
+      <div class="sec-head reveal"><span class="eyebrow">FAQ</span><h2 class="serif">Good to know.</h2></div>
+      <div class="faq-list" id="faqList"><!-- injected --></div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div class="footer-brand">
+        <a class="brand" href="/">
+          <span class="brand-mark" style="color:var(--accent)"><img src="assets/miraukin-logo.webp" alt="" width="26" height="26" /></span>
+          <span class="brand-name" data-brand="name">Strike</span>
+        </a>
+        <p class="footer-tag" data-brand="tagline">Options on tokenized stocks. On-chain.</p>
+        <span class="tag" data-brand="ticker">$MERAKI</span>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="app.html">Terminal</a>
+          <a href="#markets">Markets</a>
+          <a href="#how">How it works</a>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <a data-link="x" href="#">X / Twitter</a>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <a data-link="docs" href="#">Docs</a>
+          <a href="#faq">FAQ</a>
+          <a href="legal.html">Legal &amp; risk</a>
+        </div>
+      </div>
+    </div>
+    <div class="wrap footer-legal">
+      <p class="disclaimer">
+        <span data-brand="name">Strike</span> is experimental, unaudited software for tokenized-derivative
+        trading. Options carry substantial risk and are not suitable for every investor. Nothing here is
+        financial advice. The interface is not available to persons in <span data-brand="excluded">the U.S., Canada, U.K., Switzerland</span>
+        or any jurisdiction where such trading is restricted. <a href="legal.html" class="disc-link">Read the full terms &amp; risk disclosure →</a>
+      </p>
+      <p class="copyright mono">© <span data-brand="year">2026</span> <span data-brand="name">Strike</span> · <span data-brand="domain">strike.trade</span> · <a href="legal.html">Legal</a></p>
+    </div>
+  </footer>
+
+  <script type="module" src="js/ticker.js"></script>
+</body>
+</html>

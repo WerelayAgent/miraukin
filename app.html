@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Miraukin Terminal</title>
+  <meta name="description" content="Trade options on tokenized stocks." />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/app.css" />
+</head>
+<body class="app">
+
+  <!-- ===== TOP BAR ===== -->
+  <header class="app-nav">
+    <div class="app-nav-left">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" style="color:var(--accent)"><img src="assets/miraukin-logo.webp" alt="" width="26" height="26" /></span>
+        <span class="brand-name" data-brand="name">Strike</span>
+        <span class="term-tag mono">TERMINAL</span>
+      </a>
+    </div>
+    <div class="app-nav-mid mono" id="feedStatus">
+      <span class="feed-dot" id="feedDot"></span><span id="feedLabel">connecting…</span>
+    </div>
+    <div class="app-nav-right">
+      <div class="net-switch mono" id="netSwitch" title="Switch network">
+        <button type="button" class="net-opt" data-net="mainnet">Mainnet</button>
+        <button type="button" class="net-opt" data-net="testnet">Testnet</button>
+      </div>
+      <button class="btn btn-accent btn-sm" id="connectBtn">Connect Wallet</button>
+    </div>
+  </header>
+
+  <!-- ===== BODY GRID ===== -->
+  <div class="app-body">
+
+    <!-- Market rail -->
+    <aside class="rail">
+      <div class="rail-head mono">Markets</div>
+      <div class="rail-list" id="railList"><!-- injected --></div>
+      <div class="rail-foot mono">
+        <div>Rate <span id="railRate">4.30%</span></div>
+        <div>Mult <span id="railMult">×1</span></div>
+      </div>
+      <p class="rail-note mono" id="railNote" hidden>🔒 markets are locked until the vault has enough liquidity to cover them. They unlock automatically as liquidity grows.</p>
+    </aside>
+
+    <!-- Chain -->
+    <main class="chain-panel">
+      <div class="mkt-header">
+        <div class="mh-left">
+          <span class="mh-sym" id="mhSym">NVDA</span>
+          <span class="mh-name" id="mhName">NVIDIA</span>
+        </div>
+        <div class="mh-right mono">
+          <span class="mh-spot" id="mhSpot">$0.00</span>
+          <span class="delta pos" id="mhDelta">+0.00%</span>
+        </div>
+      </div>
+
+      <div class="chart-wrap">
+        <div class="chart-head mono">
+          <div class="chart-ranges" id="chartRanges">
+            <button data-r="1D">1D</button><button data-r="1W">1W</button>
+            <button data-r="1M" class="active">1M</button><button data-r="3M">3M</button><button data-r="1Y">1Y</button>
+          </div>
+          <span class="chart-src" id="chartSrc"></span>
+        </div>
+        <canvas id="priceChart"></canvas>
+        <div id="chartFrame" class="chart-frame"></div>
+      </div>
+
+      <div class="chain-title mono">Option chain</div>
+      <div class="expiry-tabs mono" id="expiryTabs"><!-- injected --></div>
+      <div class="chain-scroll">
+        <table class="chain-table mono" id="chainTable">
+          <thead>
+            <tr>
+              <th class="side-lbl call">Calls</th><th>Δ</th><th>IV</th>
+              <th class="strike-col">Strike</th>
+              <th>IV</th><th>Δ</th><th class="side-lbl put">Puts</th>
+            </tr>
+          </thead>
+          <tbody id="chainBody"><!-- injected --></tbody>
+        </table>
+      </div>
+    </main>
+
+    <!-- Ticket -->
+    <aside class="ticket-panel">
+      <div class="ticket">
+        <div class="ticket-sides" id="ticketSides">
+          <button data-side="buyCall" class="active">Buy Call</button>
+          <button data-side="buyPut">Buy Put</button>
+          <button data-side="sellCall" data-write="1">Sell Call</button>
+          <button data-side="sellPut" data-write="1">Sell Put</button>
+        </div>
+
+        <div class="ticket-row">
+          <label>Strike</label>
+          <select id="ticketStrike" class="mono"></select>
+        </div>
+        <div class="ticket-row">
+          <label>Expiry</label>
+          <select id="ticketExpiry" class="mono"></select>
+        </div>
+        <div class="ticket-row">
+          <label>Contracts</label>
+          <div class="qty">
+            <button id="qtyMinus">–</button>
+            <input id="ticketQty" class="mono" type="number" min="1" value="1" />
+            <button id="qtyPlus">+</button>
+          </div>
+        </div>
+        <div class="ticket-row">
+          <label>Spend</label>
+          <div class="budget-field">
+            <input id="ticketBudget" class="mono" type="number" min="0" step="0.1" placeholder="e.g. 5" />
+            <span class="budget-suffix mono">USDG</span>
+          </div>
+        </div>
+
+        <div class="ticket-metrics mono" id="ticketMetrics"><!-- injected --></div>
+
+        <div class="payoff-wrap">
+          <div class="payoff-head mono"><span>Payoff at expiry</span><span id="payoffBE"></span></div>
+          <canvas id="payoff" height="150"></canvas>
+        </div>
+
+        <button class="btn btn-accent place-btn" id="placeBtn">Place order</button>
+        <p class="ticket-note mono" id="ticketNote">Fully collateralized · cash-settled</p>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ===== POSITIONS ===== -->
+  <section class="positions">
+    <div class="pos-summary mono" id="posSummary">
+      <div class="ps"><span class="ps-l">Open positions</span><span class="ps-v" id="sumOpen">0</span></div>
+      <div class="ps"><span class="ps-l">Collateral locked</span><span class="ps-v" id="sumCollat">$0.00</span></div>
+      <div class="ps"><span class="ps-l">Net delta</span><span class="ps-v" id="sumDelta">0.00</span></div>
+      <div class="ps"><span class="ps-l">Unrealized P/L</span><span class="ps-v" id="sumPnl">$0.00</span></div>
+    </div>
+    <div class="pos-scroll">
+      <table class="pos-table mono">
+        <thead><tr>
+          <th>Market</th><th>Position</th><th>Strike</th><th>Exp</th><th>Qty</th>
+          <th>Entry</th><th>Mark</th><th>Value</th><th>P/L</th><th></th>
+        </tr></thead>
+        <tbody id="posBody"><tr class="pos-empty"><td colspan="10">No open positions. Click a strike in the chain to build a trade.</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="toast-host" id="toastHost"></div>
+
+  <script src="js/vendor/ethers.min.js"></script>
+  <script src="https://s3.tradingview.com/tv.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
