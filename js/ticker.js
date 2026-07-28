@@ -28,7 +28,7 @@ function updateNavTicker() {
 setInterval(() => { navIdx++; updateNavTicker(); }, 3200);
 
 /* ---------- hero live mini-chain ---------- */
-const PREVIEW_SYM = 'NVDA';
+const PREVIEW_SYM = 'WIF';
 function renderPreview() {
   const s = feed.get(PREVIEW_SYM); if (!s) return;
   const spot = s.price;
@@ -104,7 +104,7 @@ function updateGrid() {
 
 /* ---------- FAQ ---------- */
 const FAQ = [
-  ['What exactly am I trading?', 'Options on tokenized stocks — ERC-20 tokens that track real equities like NVDA or SPY via on-chain oracle price feeds. You trade standard calls and puts designed to cash-settle to the oracle price at expiry.'],
+  ['What exactly am I trading?', 'Options on tokenized stocks — ERC-20 tokens that track real equities like WIF or SPY via on-chain oracle price feeds. You trade standard calls and puts designed to cash-settle to the oracle price at expiry.'],
   ['Where does my collateral go?', 'By design, into the protocol’s settlement contract: long premium and short collateral are locked on-chain and never rehypothecated or lent out. This interface is a working preview — pricing and payoffs are real, and the settlement contracts go live on deploy.'],
   ['How is a fair price determined?', 'Premiums are quoted from a live pricing engine — Black-Scholes with a per-name volatility surface — referencing the oracle spot. What you see in the chain is exactly what the ticket and payoff price against.'],
   ['Do I need to be online at expiry?', 'No. Contracts are designed to cash-settle automatically against the oracle at expiry, so there is no manual exercise and no assignment surprises.'],

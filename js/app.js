@@ -52,7 +52,7 @@ const EXP = buildExpiries();
 /* ---------- state ---------- */
 const params = new URLSearchParams(location.search);
 const state = {
-  sym: marketBySym(params.get('sym')) ? params.get('sym') : 'NVDA',
+  sym: marketBySym(params.get('sym')) ? params.get('sym') : 'WIF',
   expiry: EXP[2].ms,           // ~30d default
   side: 'buyCall',
   strike: null,                // set on first render

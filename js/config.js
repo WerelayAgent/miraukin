@@ -11,7 +11,7 @@ export const BRAND = {
   name: 'Miraukin',                    // <- change to rename everywhere
   shortName: 'Miraukin',
   ticker: 'MIRAUKIN',                  // token ticker (shown as $MIRAUKIN)
-  ca: '0x5abca8797404e8c870f24f61b3ccd0ed612c98ef', // $MIRAUKIN contract address
+  ca: 'coming soon on pump.fun', // $MIRAUKIN contract address
   domain: 'miraukin.com',            // placeholder domain
   tagline: 'Options on Pump.fun & Solana memecoins.',
   heroSub:
