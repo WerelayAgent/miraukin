@@ -13,23 +13,23 @@ export const BRAND = {
   ticker: 'MIRAUKIN',                  // token ticker (shown as $MIRAUKIN)
   ca: '9PviLSRnFtWrDfdz5wE25opzscqDvxZe9Rzk69qWpump', // $MIRAUKIN contract address
   domain: 'miraukin.com',            // placeholder domain
-  tagline: 'Options on Pump.fun & Solana memecoins.',
+  tagline: 'Options on Pons Family & Robinhood Chain memecoins.',
   heroSub:
-    'Buy calls and puts on your favorite Solana tokens, or write them to earn premium. ' +
+    'Buy calls and puts on your favorite Robinhood Chain tokens, or write them to earn premium. ' +
     'Fully collateralized, priced by live oracles, and open 24/7.',
 
   // Single signature accent (mint-aqua). Distinct from Hyperliquid mint,
   // premium on near-black. Swap this one value to re-tone the whole site.
-  accent: '#a855f7', // Purple accent for Pump.fun vibe
+  accent: '#a855f7', // Purple accent for Pons Family vibe
   accentInk: '#000000',
 
   // Chain
   chain: {
-    name: 'Solana',
+    name: 'Robinhood Chain',
     chainId: 101,                   
     chainIdHex: '0x65',
-    rpc: 'https://api.mainnet-beta.solana.com',
-    currency: { name: 'Solana', symbol: 'SOL', decimals: 9 },
+    rpc: 'https://api.mainnet-beta.robinhoodchain.com',
+    currency: { name: 'Robinhood Chain', symbol: 'SOL', decimals: 9 },
     explorer: 'https://solscan.io',
   },
 
@@ -49,7 +49,7 @@ export const BRAND = {
   contractMultiplier: 1,             
   houseEdge: 0.40,                   // +40% premium markup
 
-  /* Solana / Pump.fun meme markets. */
+  /* Robinhood Chain / Pons Family meme markets. */
   markets: [
     { sym: 'WIF',    name: 'dogwifhat',      baseSpot: 2.50,      iv: 1.20, gmgn: 'sol/EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm' },
     { sym: 'POPCAT', name: 'Popcat',         baseSpot: 0.85,      iv: 1.50, gmgn: 'sol/7GCihgDB8fe6KNjn2MyTKzYc121eZo18q14x8J76pUa7' },
